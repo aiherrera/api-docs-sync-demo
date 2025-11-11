@@ -1,0 +1,14 @@
+{
+  "name": "api-docs-sync-demo",
+  "private": true,
+  "scripts": {
+    "combine": "node scripts/combine.js",
+    "validate": "node scripts/validate.js",
+    "build": "npm run combine && npm run validate",
+    "serve": "npx http-server -p 4173 .",
+    "dev": "npm run build && npm run serve"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

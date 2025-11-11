@@ -1,0 +1,24 @@
+name: docs-pipeline
+on:
+  push:
+    paths:
+      - 'specs/**'
+      - 'scripts/**'
+      - 'package.json'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run combine
+      - run: pnpm run validate
+      # Optionally publish /build + /docs to a static host (e.g., GH Pages, Cloudflare Pages)

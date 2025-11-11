@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Unified API Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Redoc via CDN -->
+    <script src="https://unpkg.com/redoc/bundles/redoc.standalone.js"></script>
+    <style>html,body{height:100%;margin:0;padding:0} body{font-family:Inter,system-ui}</style>
+  </head>
+  <body>
+    <div id="redoc-container"></div>
+    <script>
+      // Determine the correct spec URL based on environment
+      let specUrl;
+      if (window.location.protocol === 'file:') {
+        // Local file system (opening HTML directly)
+        specUrl = '../build/openapi.json';
+      } else if (window.location.pathname.includes('/docs/')) {
+        // Local dev server (http://localhost:4173/docs/index.html)
+        specUrl = '../build/openapi.json';
+      } else {
+        // GitHub Pages (served from root after deployment)
+        specUrl = 'build/openapi.json';
+      }
+
+      Redoc.init(
+        specUrl,
+        {
+          scrollYOffset: 0,
+          hideDownloadButton: false,
+          theme: {
+            colors: {
+              primary: { main: '#3b82f6' }
+            }
+          }
+        },
+        document.getElementById('redoc-container')
+      );
+    </script>
+  </body>
+</html>

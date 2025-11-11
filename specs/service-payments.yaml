@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: Payments Service
+  version: 0.9.0
+servers:
+  - url: https://api.example.com/payments
+paths:
+  /payments:
+    post:
+      operationId: createPayment
+      summary: Create payment
+      description: Creates a payment intent.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount: { type: number }
+      responses:
+        '201':
+          description: Created
+  /payments/{id}:
+    get:
+      operationId: getPayment
+      summary: Get payment
+      description: Retrieve payment by id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Payment:
+      type: object
+      properties:
+        id: { type: string }
+        amount: { type: number }
